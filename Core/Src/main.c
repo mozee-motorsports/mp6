@@ -93,6 +93,10 @@ int main(void)
 
   /* USER CODE END 2 */
 
+  /*
+      NOTE: This is the entry point for ThreadX. Not sure 
+      when initialization actually happens
+  */
   MX_ThreadX_Init();
 
   /* We should never get here as control is now taken by the scheduler */
