@@ -1,4 +1,3 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
@@ -8,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2021 STMicroelectronics.
+  * Copyright (c) 2020-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -17,6 +16,7 @@
   *
   ******************************************************************************
   */
+
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -39,7 +39,10 @@ extern "C" {
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
-/* define the size of static threadX byte memory pools */
+/* Using static memory allocation via threadX Byte memory pools */
+
+#define USE_STATIC_ALLOCATION                    1
+
 #define TX_APP_MEM_POOL_SIZE                     1024
 
 /* USER CODE BEGIN EC */

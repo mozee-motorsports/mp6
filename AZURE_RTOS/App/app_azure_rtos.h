@@ -1,14 +1,13 @@
-
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
   * @file    app_azure_rtos.h
   * @author  MCD Application Team
-  * @brief   azure_rtos application header file
+  * @brief   app_azure_rtos application header file
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2021 STMicroelectronics.
+  * Copyright (c) 2020-2021 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
