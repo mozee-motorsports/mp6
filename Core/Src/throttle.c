@@ -5,16 +5,30 @@
 
 int servo_init( void ) {
     // pot0 = PA0
-    GPIO_InitTypeDef init_struct = {0};
-    init_struct.Pin = GPIO_PIN_0
+    GPIO_InitTypeDef throttle_init_a = {0};
+    throttle_init_a.Pin = GPIO_PIN_0;
     // mode is push-pull, but Analog?
-    init_struct.Mode = GPIO_MODE_ANALOG;
-    init_struct.Pull = GPIO_NOPULL;
-    init_struct.Speed = GPIO_SPEED_FREQ_HIGH;
-    HAL_GPIO_Init(GPIOA, &init_struct)
+    throttle_init_a.Mode = GPIO_MODE_ANALOG;
+    throttle_init_a.Pull = GPIO_NOPULL;
+    throttle_init_a.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOA, &throttle_init_a);
 
     // pot1 = PA1
+    GPIO_InitTypeDef throttle_init_b = {0};
+    throttle_init_b.Pin = GPIO_PIN_1;
+    // mode is push-pull, but Analog?
+    throttle_init_b.Mode = GPIO_MODE_ANALOG;
+    throttle_init_b.Pull = GPIO_NOPULL;
+    throttle_init_b.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOA, &throttle_init_b);
 
+    // servo0 = PA2
+    GPIO_InitTypeDef servo_init_a = {0};
+    servo_init_a.Pin = GPIO_PIN_2;
+    servo_init_a.Mode = GPIO_MODE_AF_PP;
+    servo_init_a.Pull = GPIO_NOPULL;
+    servo_init_a.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOA, &servo_init_a);
 }
 
 void task_poll_servo( void ) {
