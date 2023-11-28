@@ -59,22 +59,7 @@ static void MX_USB_OTG_HS_USB_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-#define BYTES_TO_ALLOC_TO_BLINKY_THREAD 1024
-#define BLINKY_LIGHT_TASK_PRIORITY 1
 
-uint8_t BlinkyLightTaskStack[BYTES_TO_ALLOC_TO_BLINKY_THREAD];
-
-TX_THREAD BlinkyLightTaskThread;
-void BlinkyLightTask( void ) {
-
-    while(1) {
-      HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_1);
-      HAL_Delay(100);    
-    }
-
-    tx_thread_sleep(10);
-
-}
 /* USER CODE END 0 */
 
 /**
@@ -117,6 +102,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
+  // https://learn.microsoft.com/en-us/azure/rtos/threadx/chapter4#tx_thread_create
   tx_kernel_enter();
   // while (1)
   // {

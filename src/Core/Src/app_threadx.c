@@ -20,6 +20,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "app_threadx.h"
+#include "stm32h723xx.h"
+#include "stm32h7xx_hal_gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -33,7 +35,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define BYTES_TO_ALLOC_TO_BLINKY_THREAD 1024
+#define BLINKY_LIGHT_TASK_PRIORITY 1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -43,12 +46,22 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+uint8_t BlinkyLightTaskStack[BYTES_TO_ALLOC_TO_BLINKY_THREAD];
+TX_THREAD BlinkyLightTaskThread;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
 
+
+void BlinkyLightTask(void) {
+    while(1) {
+      HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_1);
+      HAL_Delay(100);    
+    }
+
+    tx_thread_sleep(10);
+}
 /* USER CODE END PFP */
 
 /**
@@ -81,6 +94,17 @@ void MX_ThreadX_Init(void)
 
   /* USER CODE END  Before_Kernel_Start */
 
+  tx_thread_create(     &BlinkyLightTaskThread, 
+                        "Blink light task",
+                        BlinkyLightTask,
+                        0,                             // entry input
+                        (void *) BlinkyLightTaskStack, // stack 
+                        BYTES_TO_ALLOC_TO_BLINKY_THREAD,
+                        BLINKY_LIGHT_TASK_PRIORITY,
+                        BLINKY_LIGHT_TASK_PRIORITY,
+                        TX_NO_TIME_SLICE
+                        TX_AUTO_START
+                        );
   tx_kernel_enter();
 
   /* USER CODE BEGIN  Kernel_Start_Error */
