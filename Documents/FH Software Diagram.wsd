@@ -31,14 +31,13 @@ actor :Driver: as driver
 package STM32_H723ZG {
 	usecase (System Initialization) as U0
 	usecase (Thread Scheduler) as U1
-	usecase (Can IO) as T0
-	usecase (Pedel Position) as T1
-	usecase (ICE Throttle) as T2
-	usecase (EM Output) as T3
-	usecase (Dashboard Control) as T4
-	usecase (Data Collection) as T5
-	usecase (Data Output) as T6
-	usecase (ERM) as T7
+	usecase (Can I/O) as T0
+	usecase (ICE Throttle) as T1
+	usecase (Electric Throttle) as T2
+	usecase (Dashboard Data) as T3
+	usecase (Data Collection) as T4
+	usecase (Data Logging) as T5
+	usecase (Error Handling) as T6
 }
 
 /''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -54,10 +53,9 @@ U1 --> T3
 U1 --> T4
 U1 --> T5
 U1 --> T6
-U1 --> T7
 
 'Driver interactions
-driver -> T1
-T4 -> driver
+driver -> T4
+T3 -> driver
 
 @enduml
