@@ -1,0 +1,63 @@
+/''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ '	Author: Daniel Nimsgern (nimsgernd@msoe.edu) <dannimsgern@gmail.com>
+ '	Date:	11/17/2023
+ '	Brief:	Diagram showing the general software interactions within the 2023
+ '			MSOE Formula Hybrid controll computer.
+ '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''/
+
+@startuml Formula Hybrid Software
+
+/''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ ' General Diagram Parameters
+ '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''/
+
+'Overall theme
+!theme reddress-darkred
+
+/''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ ' Actors
+ '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''/
+
+'Changing visual parameters
+Skinparam actorstyle awesome
+
+'Defining actors
+actor :Driver: as driver
+
+/''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ ' Packages
+ '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''/
+
+package STM32_H723ZG {
+	usecase (System Initialization) as U0
+	usecase (Thread Scheduler) as U1
+	usecase (Can IO) as T0
+	usecase (Pedel Position) as T1
+	usecase (ICE Throttle) as T2
+	usecase (EM Output) as T3
+	usecase (Dashboard Control) as T4
+	usecase (Data Collection) as T5
+	usecase (Data Output) as T6
+	usecase (ERM) as T7
+}
+
+/''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ 'Connections
+ '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''/
+
+'STM32_H723ZG internal connections
+U0 --> U1
+U1 --> T0
+U1 --> T1
+U1 --> T2
+U1 --> T3
+U1 --> T4
+U1 --> T5
+U1 --> T6
+U1 --> T7
+
+'Driver interactions
+driver -> T1
+T4 -> driver
+
+@enduml
