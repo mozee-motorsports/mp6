@@ -20,11 +20,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "app_threadx.h"
-#include "stm32h723xx.h"
-#include "stm32h7xx_hal_gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stm32h7xx_hal_gpio.h"
 
 /* USER CODE END Includes */
 
@@ -94,17 +93,6 @@ void MX_ThreadX_Init(void)
 
   /* USER CODE END  Before_Kernel_Start */
 
-  tx_thread_create(     &BlinkyLightTaskThread, 
-                        "Blink light task",
-                        BlinkyLightTask,
-                        0,                             // entry input
-                        (void *) BlinkyLightTaskStack, // stack 
-                        BYTES_TO_ALLOC_TO_BLINKY_THREAD,
-                        BLINKY_LIGHT_TASK_PRIORITY,
-                        BLINKY_LIGHT_TASK_PRIORITY,
-                        TX_NO_TIME_SLICE
-                        TX_AUTO_START
-                        );
   tx_kernel_enter();
 
   /* USER CODE BEGIN  Kernel_Start_Error */

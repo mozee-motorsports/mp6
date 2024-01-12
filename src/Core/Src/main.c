@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "app_threadx.h"
+#include "stm32h7xx_hal_def.h"
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
