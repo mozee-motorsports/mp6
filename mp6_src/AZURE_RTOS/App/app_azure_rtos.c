@@ -54,7 +54,7 @@ __ALIGN_BEGIN static UCHAR tx_byte_pool_buffer[TX_APP_MEM_POOL_SIZE] __ALIGN_END
 static TX_BYTE_POOL tx_app_byte_pool;
 
 #endif
-
+// public variables?
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
