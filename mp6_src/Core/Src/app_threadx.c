@@ -19,11 +19,11 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdint.h>
 #include "app_threadx.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stm32h723xx.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define TX_TBW_STACK_SIZE 1024
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -43,13 +43,17 @@
 
 /* Private variables ---------------------------------------------------------*/
 TX_THREAD tx_app_thread;
+TX_THREAD tx_can_thread;
+TX_THREAD tx_tbw_thread;
+
+uint8_t tx_tbw_thread_stack[TX_TBW_STACK_SIZE];
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN PFP */
-
+VOID tbw_thread_entry(ULONG initial_input);
 /* USER CODE END PFP */
 
 /**
@@ -81,6 +85,18 @@ UINT App_ThreadX_Init(VOID *memory_ptr)
   }
 
   /* USER CODE BEGIN App_ThreadX_Init */
+  tx_thread_create(
+    &tx_tbw_thread, // thread pointer
+    "tbw_thread", // thread name
+    tbw_thread_entry, // entry function
+    0, // entry input
+    &tx_tbw_thread_stack,
+    TX_TBW_STACK_SIZE,
+    15, // priority
+    15, // preemnt threshold
+    1,  // only matters for round robin, we're not using
+    TX_AUTO_START
+  );
 
   /* USER CODE END App_ThreadX_Init */
 
@@ -117,5 +133,11 @@ void MX_ThreadX_Init(void)
 }
 
 /* USER CODE BEGIN 1 */
+VOID tbw_thread_entry(ULONG initial_input) {
+   while (1) {
+      HAL_GPIO_TogglePin(GPIOE, 0x0002);
+      tx_thread_sleep(20);    
+    }
 
+}
 /* USER CODE END 1 */
