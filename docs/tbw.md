@@ -1,0 +1,3 @@
+- ADC1_IN2: On Pin PF11
+- PWM generation is going to be on TIM4, which is a general purpose timer, described on p1684. CH1 PWM output goes to PD12.
+- [CAN Video](https://www.youtube.com/watch?v=sY1ie-CnOR0)
